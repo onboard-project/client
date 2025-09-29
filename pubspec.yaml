@@ -2,7 +2,7 @@ name: onboard_client
 description: The user-facing application for the Onboard Project, built with Flutter.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 0.0.1-Beta
+version: 0.2.0-Beta
 environment:
   sdk: ^3.9.0
 

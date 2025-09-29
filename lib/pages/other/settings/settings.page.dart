@@ -174,7 +174,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   "Gestisci, concedi e nega autorizzazioni",
                                 ),
                                 onTap: () {
-                                  context.push('/settings/favourites');
+                                  context.push('/settings/permissions');
                                 },
                                 trailing: Icon(
                                   Symbols.chevron_right_rounded,

@@ -11,6 +11,7 @@ import 'package:onboard_client/pages/other/details/stop.page.dart';
 import 'package:onboard_client/pages/other/search.page.dart';
 import 'package:onboard_client/pages/other/settings/favourites.settings.page.dart';
 import 'package:onboard_client/pages/other/settings/linesinfo.settings.page.dart';
+import 'package:onboard_client/pages/other/settings/permissions.settings.page.dart';
 import 'package:onboard_client/pages/other/settings/settings.page.dart';
 import 'package:onboard_client/pages/other/status/metro.status.page.dart';
 import 'package:onboard_client/pages/other/status/surface.status.page.dart';
@@ -99,6 +100,10 @@ class OnboardRouter {
           GoRoute(
             path: '/settings/favourites',
             builder: (context, state) => FavouritesSettingsPage(),
+          ),
+          GoRoute(
+            path: '/settings/permissions',
+            builder: (context, state) => PermissionsSettingsPage(),
           ),
           GoRoute(
             path: '/search',

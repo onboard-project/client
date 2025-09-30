@@ -58,6 +58,8 @@ class MaterialConnectedButtonGroup extends StatelessWidget {
                     if (selected.contains(segments[i].value)) {
                       if (!emptySelectionAllowed && selected.length == 1) {
                         newSelection = selected;
+                      } else {
+                        newSelection = selected.difference({segments[i].value});
                       }
                     } else {
                       if (multiSelectionEnabled) {

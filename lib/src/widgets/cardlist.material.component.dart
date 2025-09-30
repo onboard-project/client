@@ -52,7 +52,7 @@ class MaterialCard extends StatelessWidget {
     return Container(
       color: isError
           ? Theme.of(context).colorScheme.error
-          : Theme.of(context).colorScheme.surfaceContainerHighest,
+          : Theme.of(context).colorScheme.surfaceContainerHigh,
       child: DefaultTextStyle(
         style: TextStyle(
           color: isError

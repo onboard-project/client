@@ -21,7 +21,7 @@ List<Widget> materialCardList({
     return Container(
       key: usesKeys ? Key('${i + startKey}') : null,
       margin: topMargin,
-      clipBehavior: Clip.hardEdge,
+      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(topRadius),
@@ -49,17 +49,19 @@ class MaterialCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: isError
-          ? Theme.of(context).colorScheme.error
-          : Theme.of(context).colorScheme.surfaceContainerHigh,
-      child: DefaultTextStyle(
-        style: TextStyle(
-          color: isError
-              ? Theme.of(context).colorScheme.onError
-              : Theme.of(context).colorScheme.onSurface,
+    return Material(
+      child: Container(
+        color: isError
+            ? Theme.of(context).colorScheme.error
+            : Theme.of(context).colorScheme.surfaceContainerHigh,
+        child: DefaultTextStyle(
+          style: TextStyle(
+            color: isError
+                ? Theme.of(context).colorScheme.onError
+                : Theme.of(context).colorScheme.onSurface,
+          ),
+          child: child,
         ),
-        child: child,
       ),
     );
   }

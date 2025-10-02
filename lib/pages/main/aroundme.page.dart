@@ -59,7 +59,7 @@ class AroundMePage extends StatelessWidget {
               title: Text("Fermate nelle vicinanze"),
               leading: Icon(opticalSize: 24, Symbols.near_me_rounded),
             ),
-            ...materialCardList(
+            ...MaterialCard.list(
               context: context,
               children: List.generate(stops.length, (i) {
                 return MaterialCard(

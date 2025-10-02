@@ -111,7 +111,7 @@ class BranchedLineDetailsPage extends StatelessWidget {
                 ),
               ),
 
-              ...materialCardList(
+              ...MaterialCard.list(
                 children: List.generate(snapshot.data!.stops.length, (i) {
                   final stop = snapshot.data!.stops[i];
                   return MaterialCard(

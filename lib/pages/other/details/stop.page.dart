@@ -157,7 +157,7 @@ class _StopDetailsPageState extends State<StopDetailsPage> {
                 ),
               ),
 
-              ...materialCardList(
+              ...MaterialCard.list(
                 children: List.generate(snapshot.data!.lines.length, (i) {
                   final line = snapshot.data!.lines[i];
                   return MaterialCard(

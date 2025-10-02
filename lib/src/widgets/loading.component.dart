@@ -15,7 +15,7 @@ class LoadingComponent extends StatelessWidget {
             LinearProgressIndicator(year2023: false),
             SizedBox(height: 12),
           ] +
-          materialCardList(
+          MaterialCard.list(
             children: List.generate(
               3,
               (i) => Skeletonizer(

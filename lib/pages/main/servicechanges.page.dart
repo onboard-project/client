@@ -17,7 +17,7 @@ class ServiceChangesPage extends StatelessWidget {
               leading: Icon(opticalSize: 24, Symbols.campaign_rounded),
             ),
           ] +
-          materialCardList(
+          MaterialCard.list(
             context: context,
             // TODO: add functionality to Service Changes Page (Needs server and SDK implementation before)
             children: [

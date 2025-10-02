@@ -35,7 +35,7 @@ class PermissionsSettingsPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        ...materialCardList(
+                        ...MaterialCard.list(
                           children: [
                             FutureBuilder(
                               future: Geolocator.checkPermission(),

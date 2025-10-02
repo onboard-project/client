@@ -57,7 +57,7 @@ class FavouritesComponent extends StatelessWidget {
         final lines = snapshot.data!['lines'];
         final stops = snapshot.data!['stops'];
         return Column(
-          children: materialCardList(
+          children: MaterialCard.list(
             children: [
               ...List.generate(stops!.length, (i) {
                 return MaterialCard(

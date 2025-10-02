@@ -26,8 +26,8 @@ class NetworkStatusComponent extends StatelessWidget {
           }
         }
         return Column(
-          children: materialCardList(
-            // Spread the widgets from materialCardList into the ListView
+          children: MaterialCard.list(
+            // Spread the widgets from MaterialCard.list into the ListView
             children: [
               MaterialCard.variable(
                 isError: !snapshot.data!.regular(),

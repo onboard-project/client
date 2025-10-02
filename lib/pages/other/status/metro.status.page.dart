@@ -25,7 +25,7 @@ class MetroStatusPage extends StatelessWidget {
           ),
           title: Text("Stato delle linee Metropolitane"),
         ),
-        ...materialCardList(
+        ...MaterialCard.list(
           children:
               (status.regular()
                   ? <Widget>[]

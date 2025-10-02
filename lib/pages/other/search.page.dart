@@ -158,7 +158,7 @@ class _SearchUiState extends State<_SearchUi> {
             ),
           ),
           SizedBox(height: 12),
-          ...materialCardList(
+          ...MaterialCard.list(
             children: [
               MaterialCard(
                 child: ExpansionTile(
@@ -193,7 +193,7 @@ class _SearchUiState extends State<_SearchUi> {
             title: const Text("Linee metropolitane"),
             contentPadding: EdgeInsets.zero,
           ),
-          ...materialCardList(
+          ...MaterialCard.list(
             children: List.generate(metroSearchResultsList.take(15).length, (
               i,
             ) {
@@ -215,7 +215,7 @@ class _SearchUiState extends State<_SearchUi> {
             title: const Text("Linee di superficie"),
             contentPadding: EdgeInsets.zero,
           ),
-          ...materialCardList(
+          ...MaterialCard.list(
             children: List.generate(surfaceSearchResultsList.take(15).length, (
               i,
             ) {
@@ -234,7 +234,7 @@ class _SearchUiState extends State<_SearchUi> {
             context: context,
           ),
           ListTile(title: Text("Fermate"), contentPadding: EdgeInsets.zero),
-          ...materialCardList(
+          ...MaterialCard.list(
             children: List.generate(stopSearchResultsList.take(15).length, (i) {
               final stop = stopSearchResultsList[i];
               return MaterialCard(

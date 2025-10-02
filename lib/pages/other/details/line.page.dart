@@ -225,7 +225,7 @@ class _LineDetailsPageState extends State<LineDetailsPage> {
                   ),
                 ),
               ),
-              ...materialCardList(
+              ...MaterialCard.list(
                 children: [
                   MaterialCard(
                     child: ExpansionTile(
@@ -256,7 +256,7 @@ class _LineDetailsPageState extends State<LineDetailsPage> {
                 context: context,
               ),
               SizedBox(height: 12),
-              ...materialCardList(
+              ...MaterialCard.list(
                 children: List.generate(snapshot.data!.stops.length, (i) {
                   final stop = snapshot.data!.stops[i];
                   return MaterialCard(

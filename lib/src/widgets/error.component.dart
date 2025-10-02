@@ -17,7 +17,7 @@ class _ErrorComponentState extends State<ErrorComponent> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ...materialCardList(
+        ...MaterialCard.list(
           children: [
             MaterialCard.error(
               child: ExpansionTile(

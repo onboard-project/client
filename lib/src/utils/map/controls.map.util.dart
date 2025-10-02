@@ -87,7 +87,7 @@ void showLayersDialog(BuildContext context, ValueNotifier<Map> map) {
                 title: Text("Scegli quali livelli sono mostrati sulla mappa"),
               ),
 
-              ...materialCardList(
+              ...MaterialCard.list(
                 children: [
                   MaterialCard(
                     child: ListTile(

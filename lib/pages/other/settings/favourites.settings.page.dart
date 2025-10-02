@@ -195,7 +195,7 @@ class _FavouritesSettingsUiState extends State<_FavouritesSettingsUi> {
             );
           },
           proxyDecorator: proxyDecorator,
-          children: materialCardList(
+          children: MaterialCard.list(
             children: List.generate(_stops.length, (i) {
               final stop = _stops[i];
               return MaterialCard(
@@ -243,7 +243,7 @@ class _FavouritesSettingsUiState extends State<_FavouritesSettingsUi> {
           shrinkWrap: true,
           buildDefaultDragHandles: false, // Ensure this is false
           physics: const NeverScrollableScrollPhysics(),
-          children: materialCardList(
+          children: MaterialCard.list(
             children: List.generate(_lines.length, (i) {
               final line = _lines[i];
               return MaterialCard(

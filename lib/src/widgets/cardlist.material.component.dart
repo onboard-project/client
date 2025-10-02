@@ -34,26 +34,32 @@ List<Widget> materialCardList({
 }
 
 class MaterialCard extends StatelessWidget {
-  const MaterialCard({super.key, required this.child}) : isError = false;
-  const MaterialCard.error({super.key, required this.child}) : isError = true;
+  const MaterialCard({super.key, required this.child, this.isHighest = false})
+    : isError = false;
+  const MaterialCard.error({super.key, required this.child})
+    : isError = true,
+      isHighest = false;
 
   const MaterialCard.variable({
     super.key,
 
     required this.child,
     required this.isError,
+    this.isHighest = false,
   });
 
   final bool isError;
   final Widget child;
-
+  final bool isHighest;
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Container(
         color: isError
             ? Theme.of(context).colorScheme.error
-            : Theme.of(context).colorScheme.surfaceContainerHigh,
+            : (isHighest
+                  ? Theme.of(context).colorScheme.surfaceContainerHighest
+                  : Theme.of(context).colorScheme.surfaceContainerHigh),
         child: DefaultTextStyle(
           style: TextStyle(
             color: isError

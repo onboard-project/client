@@ -44,16 +44,18 @@ class MaterialCard extends StatelessWidget {
     required BuildContext context,
     bool usesKeys = false,
     int startKey = 0,
+    bool containsHeader = true,
+    bool containsFooter = true,
   }) {
     return List.generate(children.length, (i) {
       double topRadius = 4;
       double bottomRadius = 4;
       EdgeInsets topMargin = EdgeInsets.only(top: 4);
-      if (i == 0) {
+      if (i == 0 && containsHeader) {
         topMargin = EdgeInsets.only(top: 0);
         topRadius = 12;
       }
-      if (i == children.length - 1) {
+      if (i == children.length - 1 && containsFooter) {
         bottomRadius = 12;
       }
 
@@ -71,4 +73,46 @@ class MaterialCard extends StatelessWidget {
       );
     });
   }
+
+  static Widget single({
+    required Widget child,
+    required BuildContext context,
+    MaterialCardPosition position = MaterialCardPosition.center,
+    Key? key,
+  }) {
+    double topRadius = 4;
+    double bottomRadius = 4;
+    EdgeInsets topMargin = EdgeInsets.only(top: 4);
+
+    switch (position) {
+      case MaterialCardPosition.start:
+        topMargin = EdgeInsets.only(top: 0);
+        topRadius = 12;
+        break;
+      case MaterialCardPosition.end:
+        bottomRadius = 12;
+        break;
+      case MaterialCardPosition.single:
+        topMargin = EdgeInsets.only(top: 0);
+        topRadius = 12;
+        bottomRadius = 12;
+        break;
+      default:
+        break;
+    }
+    return Container(
+      key: key,
+      margin: topMargin,
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(topRadius),
+          bottom: Radius.circular(bottomRadius),
+        ),
+      ),
+      child: child,
+    );
+  }
 }
+
+enum MaterialCardPosition { start, center, end, single }

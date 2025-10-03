@@ -9,8 +9,10 @@ import 'package:onboard_client/pages/other/details/branch.line.page.dart';
 import 'package:onboard_client/pages/other/details/line.page.dart';
 import 'package:onboard_client/pages/other/details/stop.page.dart';
 import 'package:onboard_client/pages/other/search.page.dart';
+import 'package:onboard_client/pages/other/settings/add.notifications.settings.page.dart'; // Import for AddNotificationPage
 import 'package:onboard_client/pages/other/settings/favourites.settings.page.dart';
 import 'package:onboard_client/pages/other/settings/linesinfo.settings.page.dart';
+import 'package:onboard_client/pages/other/settings/notifications.settings.page.dart';
 import 'package:onboard_client/pages/other/settings/permissions.settings.page.dart';
 import 'package:onboard_client/pages/other/settings/settings.page.dart';
 import 'package:onboard_client/pages/other/status/metro.status.page.dart';
@@ -22,11 +24,7 @@ import 'src/shellnav.sub.widget.dart';
 
 class OnboardRouter {
   // --- Navigator Keys ---
-  // A key for the root navigator
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
-
-  // A separate key for each branch of the navigation shell. This allows
-  // each tab to have its own navigation stack.
   static final _shellNavigatorKeyRealtime = GlobalKey<NavigatorState>(
     debugLabel: 'ShellRealtime',
   );
@@ -48,7 +46,6 @@ class OnboardRouter {
   );
 
   // --- Navigation Data ---
-  // Define the navigation destinations as a static constant list.
   static final List<ShellNavigationDest> _pageDestinations = [
     ShellNavigationDest(
       text: 'Realtime',
@@ -73,13 +70,11 @@ class OnboardRouter {
     navigatorKey: _rootNavigatorKey,
     onException: (_, _, router) => router.go('/404'),
     routes: [
-      // 1. The top-level shell for the Windows title bar.
       ShellRoute(
         builder: (context, state, child) {
           return SystemShell(child: child);
         },
         routes: [
-          // The 404 page is outside the main navigation shell.
           GoRoute(
             path: '/404',
             builder: (context, state) {
@@ -92,7 +87,6 @@ class OnboardRouter {
               return const SettingsPage();
             },
           ),
-
           GoRoute(
             path: '/settings/linesinformations',
             builder: (context, state) => LinesInfoPage(),
@@ -106,26 +100,28 @@ class OnboardRouter {
             builder: (context, state) => PermissionsSettingsPage(),
           ),
           GoRoute(
+            path: '/settings/notifications',
+            builder: (context, state) => NotificationsSettingsPage(),
+          ),
+          GoRoute(
+            // New route for adding notifications
+            path: '/settings/notifications/add',
+            builder: (context, state) => const AddNotificationsSettingsPage(),
+          ),
+          GoRoute(
             path: '/search',
-
             builder: (context, state) {
               return const SearchPage();
             },
           ),
-
-          // 2. The main stateful navigation shell with the map background.
           StatefulShellRoute.indexedStack(
             builder: (context, state, navigationShell) {
-              // Pass the navigation shell to our custom ShellNavigation widget.
               return ShellNavigation(
                 navigationShell: navigationShell,
                 pageData: _pageDestinations,
               );
             },
             branches: [
-              // --- Branch 1: The Home Tab ---
-              // This branch contains the home page and all detail pages that can be
-              // accessed from it (like stop and line details).
               StatefulShellBranch(
                 navigatorKey: _shellNavigatorKeyRealtime,
                 routes: [
@@ -136,8 +132,6 @@ class OnboardRouter {
                   ),
                 ],
               ),
-
-              // --- Branch 2: The Search Tab ---
               StatefulShellBranch(
                 navigatorKey: _shellNavigatorKeyAroundMe,
                 routes: [
@@ -148,24 +142,18 @@ class OnboardRouter {
                   ),
                 ],
               ),
-
-              // --- Branch 3: The Realtime Tab ---
               StatefulShellBranch(
                 navigatorKey: _shellNavigatorKeyServiceChanges,
                 routes: [
                   GoRoute(
                     path: '/servicechanges',
-                    pageBuilder: (context, state) => const NoTransitionPage(
-                      child: ServiceChangesPage(),
-                    ), // Placeholder page
+                    pageBuilder: (context, state) =>
+                        const NoTransitionPage(child: ServiceChangesPage()),
                   ),
                 ],
               ),
             ],
           ),
-          // --- Detail Pages ---
-          // These are placed as siblings to the StatefulShellRoute.
-          // They will navigate on top of the shell.
           GoRoute(
             path: '/details/stops/:stopId',
             pageBuilder: (context, state) => NoTransitionPage(

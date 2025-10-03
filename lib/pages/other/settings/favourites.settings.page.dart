@@ -149,24 +149,6 @@ class _FavouritesSettingsUiState extends State<_FavouritesSettingsUi> {
     _lines.addAll(widget.favourites['lines']! as Iterable<Line>);
   }
 
-  Widget proxyDecorator(Widget child, int index, Animation<double> animation) {
-    return AnimatedBuilder(
-      animation: animation,
-      builder: (BuildContext context, Widget? child) {
-        return Material(
-          elevation: 0,
-          color: Colors.transparent,
-          child: MouseRegion(
-            cursor:
-                SystemMouseCursors.grabbing, // <-- Set the grabbing cursor here
-            child: child!,
-          ),
-        );
-      },
-      child: child,
-    );
-  }
-
   bool isDragging = false;
   @override
   Widget build(BuildContext context) {
@@ -194,7 +176,6 @@ class _FavouritesSettingsUiState extends State<_FavouritesSettingsUi> {
               _stops.map((e) => e.id).toList(),
             );
           },
-          proxyDecorator: proxyDecorator,
           children: MaterialCard.list(
             children: List.generate(_stops.length, (i) {
               final stop = _stops[i];

@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:onboard_client/src/navigation/router.dart';
 import 'package:onboard_client/src/utils/themeprovider/themeprovider.util.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,8 @@ import 'package:provider/provider.dart';
 void main() async {
   // Ensure that the Flutter binding is initialized before any other Flutter code.
   WidgetsFlutterBinding.ensureInitialized();
-
+  Hive.init(Directory('Z:\\').path);
+  await Hive.openBox<Map>('scheduled_notifications');
   if (!kIsWeb) {
     if (Platform.isWindows) {
       doWhenWindowReady(() {

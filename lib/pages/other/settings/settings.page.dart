@@ -46,7 +46,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                           ),
                         ),
-                        ...materialCardList(
+                        ...MaterialCard.list(
                           children: [
                             MaterialCard(
                               child: ListTile(
@@ -157,7 +157,6 @@ class _SettingsPageState extends State<SettingsPage> {
                                 ),
                               ),
                             ),
-
                             MaterialCard(
                               child: ListTile(
                                 title: Text("Autorizzazioni"),
@@ -184,6 +183,29 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             MaterialCard(
                               child: ListTile(
+                                title: Text("Gestisci notifiche"),
+                                leading: Icon(
+                                  Symbols.notifications_rounded,
+                                  opticalSize: 24,
+                                ),
+                                contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 6,
+                                ),
+                                subtitle: Text(
+                                  "Imposta e modifica le notifiche programmate",
+                                ),
+                                onTap: () {
+                                  context.push('/settings/notifications');
+                                },
+                                trailing: Icon(
+                                  Symbols.chevron_right_rounded,
+                                  opticalSize: 24,
+                                ),
+                              ),
+                            ),
+                            MaterialCard(
+                              child: ListTile(
                                 title: Text("ViaggIA"),
                                 leading: Icon(
                                   Symbols.wand_shine_rounded,
@@ -195,7 +217,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           context: context,
                         ),
                         SizedBox.square(dimension: 12),
-                        ...materialCardList(
+                        ...MaterialCard.list(
                           children: [
                             MaterialCard(
                               child: ListTile(

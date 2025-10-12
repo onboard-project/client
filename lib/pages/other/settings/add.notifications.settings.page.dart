@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
-import 'package:onboard_client/src/utils/schedulednotification.class.util.dart';
+import 'package:onboard_client/src/utils/notifications/schedulednotification.class.util.dart';
 import 'package:onboard_client/src/widgets/cardlist.material.component.dart';
 import 'package:onboard_client/src/widgets/connectedbuttongroup.material.component.dart';
 import 'package:onboard_client/src/widgets/error.component.dart';
@@ -560,7 +560,7 @@ class _AddNotificationsSettingsPageState
                                 style: FilledButton.styleFrom(
                                   minimumSize: const Size.fromHeight(48),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -576,7 +576,6 @@ class _AddNotificationsSettingsPageState
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ),
-
           ],
         ),
       ),

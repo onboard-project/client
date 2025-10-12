@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -10,6 +11,7 @@ import 'package:onboard_client/pages/other/details/line.page.dart';
 import 'package:onboard_client/pages/other/details/stop.page.dart';
 import 'package:onboard_client/pages/other/search.page.dart';
 import 'package:onboard_client/pages/other/settings/add.notifications.settings.page.dart'; // Import for AddNotificationPage
+import 'package:onboard_client/pages/other/settings/developer.settings.page.dart';
 import 'package:onboard_client/pages/other/settings/favourites.settings.page.dart';
 import 'package:onboard_client/pages/other/settings/linesinfo.settings.page.dart';
 import 'package:onboard_client/pages/other/settings/notifications.settings.page.dart';
@@ -101,12 +103,21 @@ class OnboardRouter {
           ),
           GoRoute(
             path: '/settings/notifications',
+            redirect: (context, state) {
+              if (kIsWeb) return '/settings';
+              return null;
+            },
             builder: (context, state) => NotificationsSettingsPage(),
           ),
           GoRoute(
             // New route for adding notifications
             path: '/settings/notifications/add',
             builder: (context, state) => const AddNotificationsSettingsPage(),
+          ),
+          GoRoute(
+            // New route for adding notifications
+            path: '/settings/developer',
+            builder: (context, state) => const DeveloperSettingsPage(),
           ),
           GoRoute(
             path: '/search',

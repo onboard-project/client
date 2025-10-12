@@ -6,7 +6,7 @@ class ScheduledNotification {
   String name;
   List<TimeOfDay> times;
   List<int> days;
-  List<Map<String, dynamic>> components;
+  List<Map<dynamic, dynamic>> components;
 
   ScheduledNotification({
     required this.id,
@@ -26,7 +26,7 @@ class ScheduledNotification {
     };
   }
 
-  factory ScheduledNotification.fromMap(Map<String, dynamic> map) {
+  factory ScheduledNotification.fromMap(Map<dynamic, dynamic> map) {
     return ScheduledNotification(
       id: map['id'],
       name: map['name'],
@@ -37,7 +37,9 @@ class ScheduledNotification {
         return TimeOfDay(hour: hours, minute: minutes);
       }).toList(),
       days: map['days'],
-      components: map['components'],
+      components: (map['components'] as List<dynamic>)
+          .map((component) => component as Map<dynamic, dynamic>)
+          .toList(),
     );
   }
 }

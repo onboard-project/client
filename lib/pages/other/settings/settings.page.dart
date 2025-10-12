@@ -1,5 +1,6 @@
 // in onboard_client/pages/error.page.dart
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -181,29 +182,30 @@ class _SettingsPageState extends State<SettingsPage> {
                                 ),
                               ),
                             ),
-                            MaterialCard(
-                              child: ListTile(
-                                title: Text("Gestisci notifiche"),
-                                leading: Icon(
-                                  Symbols.notifications_rounded,
-                                  opticalSize: 24,
-                                ),
-                                contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 6,
-                                ),
-                                subtitle: Text(
-                                  "Imposta e modifica le notifiche programmate",
-                                ),
-                                onTap: () {
-                                  context.push('/settings/notifications');
-                                },
-                                trailing: Icon(
-                                  Symbols.chevron_right_rounded,
-                                  opticalSize: 24,
+                            if (!kIsWeb)
+                              MaterialCard(
+                                child: ListTile(
+                                  title: Text("Gestisci notifiche"),
+                                  leading: Icon(
+                                    Symbols.notifications_rounded,
+                                    opticalSize: 24,
+                                  ),
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 6,
+                                  ),
+                                  subtitle: Text(
+                                    "Imposta e modifica le notifiche programmate",
+                                  ),
+                                  onTap: () {
+                                    context.push('/settings/notifications');
+                                  },
+                                  trailing: Icon(
+                                    Symbols.chevron_right_rounded,
+                                    opticalSize: 24,
+                                  ),
                                 ),
                               ),
-                            ),
                             MaterialCard(
                               child: ListTile(
                                 title: Text("ViaggIA"),
@@ -219,6 +221,26 @@ class _SettingsPageState extends State<SettingsPage> {
                         SizedBox.square(dimension: 12),
                         ...MaterialCard.list(
                           children: [
+                            MaterialCard(
+                              child: ListTile(
+                                title: Text("Impostazioni sviluppatore"),
+                                leading: Icon(
+                                  Symbols.mobile_code_rounded,
+                                  opticalSize: 24,
+                                ),
+                                contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 6,
+                                ),
+                                onTap: () {
+                                  context.push('/settings/developer');
+                                },
+                                trailing: Icon(
+                                  Symbols.chevron_right_rounded,
+                                  opticalSize: 24,
+                                ),
+                              ),
+                            ),
                             MaterialCard(
                               child: ListTile(
                                 title: Text("Informazioni sull'app"),

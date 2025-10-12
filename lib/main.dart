@@ -5,18 +5,40 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:onboard_client/src/navigation/router.dart';
+import 'package:onboard_client/src/utils/notifications/windows/schedule.windows.notifications.util.dart';
 import 'package:onboard_client/src/utils/themeprovider/themeprovider.util.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+
+// Global instance for the local notifications plugin
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 void main() async {
   // Ensure that the Flutter binding is initialized before any other Flutter code.
   WidgetsFlutterBinding.ensureInitialized();
-  Hive.init(Directory('Z:\\').path);
-  await Hive.openBox<Map>('scheduled_notifications');
+
+  const WindowsInitializationSettings initializationSettingsWindows =
+      WindowsInitializationSettings(
+        appName: 'Onboard',
+        appUserModelId: 'com.riccardodebellini.onboard',
+        guid: '9f9f7289-1787-43f1-a0bd-d6d254e5314e',
+      );
+
+  const InitializationSettings initializationSettings = InitializationSettings(
+    windows: initializationSettingsWindows, // <-- This was missing
+  );
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
   if (!kIsWeb) {
+    final _directory = await getApplicationCacheDirectory();
+    Hive.init(_directory.path);
+    await Hive.openBox<Map>('scheduled_notifications');
+
     if (Platform.isWindows) {
       doWhenWindowReady(() {
         appWindow.show();
@@ -26,7 +48,6 @@ void main() async {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
       SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(
-          //systemNavigationBarContrastEnforced: false,
           statusBarColor: Colors.transparent,
           systemNavigationBarColor: Colors.transparent,
           systemNavigationBarDividerColor: Colors.transparent,
@@ -43,6 +64,11 @@ void main() async {
       child: const OnboardApp(),
     ),
   );
+  if (!kIsWeb) {
+    if (Platform.isWindows) {
+      scheduleWindowsNotifications();
+    }
+  }
 }
 
 class OnboardApp extends StatelessWidget {

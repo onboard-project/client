@@ -1,8 +1,12 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:material_symbols_icons/symbols.dart';
-import 'package:onboard_client/src/utils/schedulednotification.class.util.dart';
+import 'package:onboard_client/src/utils/notifications/schedulednotification.class.util.dart';
+import 'package:onboard_client/src/utils/notifications/windows/schedule.windows.notifications.util.dart';
 import 'package:onboard_client/src/widgets/cardlist.material.component.dart';
 
 class NotificationsSettingsPage extends StatefulWidget {
@@ -61,9 +65,7 @@ class _NotificationsSettingsPageState extends State<NotificationsSettingsPage> {
     final scheduledNotifications = <ScheduledNotification>[];
     final rawNotifications = Hive.box<Map>('scheduled_notifications').values;
     for (final notification in rawNotifications) {
-      scheduledNotifications.add(
-        ScheduledNotification.fromMap(notification as Map<String, dynamic>),
-      );
+      scheduledNotifications.add(ScheduledNotification.fromMap(notification));
     }
     return scheduledNotifications;
   }
@@ -196,6 +198,11 @@ class _NotificationsSettingsPageState extends State<NotificationsSettingsPage> {
                                 'scheduled_notifications',
                               ).add(result.toMap());
 
+                              if (!kIsWeb) {
+                                if (Platform.isWindows) {
+                                  scheduleWindowsNotifications();
+                                }
+                              }
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(

@@ -22,15 +22,21 @@ void main() async {
   // Ensure that the Flutter binding is initialized before any other Flutter code.
   WidgetsFlutterBinding.ensureInitialized();
 
-  const WindowsInitializationSettings initializationSettingsWindows =
+  WindowsInitializationSettings initializationSettingsWindows =
       WindowsInitializationSettings(
+        iconPath: WindowsImage.getAssetUri(
+          'windows/runner/resources/app_icon.ico',
+        ).toString(),
         appName: 'Onboard',
         appUserModelId: 'com.riccardodebellini.onboard',
         guid: '9f9f7289-1787-43f1-a0bd-d6d254e5314e',
       );
+  AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('@mipmap/ic_launcher');
 
-  const InitializationSettings initializationSettings = InitializationSettings(
+  InitializationSettings initializationSettings = InitializationSettings(
     windows: initializationSettingsWindows, // <-- This was missing
+    android: initializationSettingsAndroid,
   );
   await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 

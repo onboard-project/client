@@ -32,7 +32,7 @@ void main() async {
         guid: '9f9f7289-1787-43f1-a0bd-d6d254e5314e',
       );
   AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
+      AndroidInitializationSettings('@mipmap/launcher_icon');
 
   InitializationSettings initializationSettings = InitializationSettings(
     windows: initializationSettingsWindows, // <-- This was missing
@@ -89,7 +89,7 @@ class OnboardApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Onboard',
           theme: FlexThemeData.light(
-            scheme: FlexScheme.shadViolet,
+            scheme: FlexScheme.shadBlue,
             fontFamily: 'DINNext',
             subThemesData: FlexSubThemesData(
               switchThumbSchemeColor: SchemeColor.primaryFixedDim,
@@ -100,7 +100,7 @@ class OnboardApp extends StatelessWidget {
           ),
           // The Mandy red, dark theme.
           darkTheme: FlexThemeData.dark(
-            scheme: FlexScheme.shadViolet,
+            scheme: FlexScheme.shadBlue,
             fontFamily: 'DINNext',
             subThemesData: FlexSubThemesData(
               switchThumbSchemeColor: SchemeColor.primaryFixedDim,

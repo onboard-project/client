@@ -59,18 +59,27 @@ class SystemShell extends StatelessWidget {
       height: 48,
       child: Container(
         color: theme.colorScheme.surface,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: Text("<> | Onboard", style: theme.textTheme.titleSmall),
-            ),
-            Expanded(child: MoveWindow()), // Allows the window to be dragged
-            MinimizeWindowButton(colors: buttonColors),
-            MaximizeWindowButton(colors: buttonColors),
-            CloseWindowButton(colors: closeButtonColors),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(left: 12),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox.square(
+                dimension: 24,
+                child: Image(
+                  image: AssetImage(
+                    'lib/assets/icons/LOGO.Onboard.rounded.png',
+                  ),
+                ),
+              ),
+              Text("Onboard", style: theme.textTheme.titleSmall),
+
+              Expanded(child: MoveWindow()), // Allows the window to be dragged
+              MinimizeWindowButton(colors: buttonColors),
+              MaximizeWindowButton(colors: buttonColors),
+              CloseWindowButton(colors: closeButtonColors),
+            ],
+          ),
         ),
       ),
     );

@@ -9,6 +9,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:onboard_client/src/navigation/router.dart';
+import 'package:onboard_client/src/utils/map/manager.map.util.dart';
 import 'package:onboard_client/src/utils/notifications/windows/schedule.windows.notifications.util.dart';
 import 'package:onboard_client/src/utils/themeprovider/themeprovider.util.dart';
 import 'package:path_provider/path_provider.dart';
@@ -85,6 +86,7 @@ class OnboardApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
+        showClickableSurfaceStops(context, map: fullMapLayers);
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           title: 'Onboard',

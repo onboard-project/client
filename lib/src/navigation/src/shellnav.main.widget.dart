@@ -147,7 +147,7 @@ class _ShellNavigationState extends State<ShellNavigation> {
                     padding: EdgeInsets.only(right: 24, top: 80),
                     child: MapControls(
                       showDirections: false,
-                      map: smallMapLayers,
+                      map: fullMapLayers,
                       mapController: mapController,
                     ),
                   ),

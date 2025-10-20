@@ -1,3 +1,14 @@
+## 0.4.0-Beta
+- Feat: add Android-only scheduled notifications.
+
+## 0.3.1-Beta
+
+- Feat: map icons preloading
+- Fix: map controls targeting wrong map on portrait
+- Fix: web not starting
+- Feat: Onboard Project Rebrand/App icon
+- Fix: Notifications icons not showing and android flutter_local_notification enablement
+
 ## 0.3.0-Beta
 
 - Feat: add Windows-only scheduled notification, developer settings page (playground), general fixes

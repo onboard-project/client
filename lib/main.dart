@@ -10,10 +10,12 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:onboard_client/src/navigation/router.dart';
 import 'package:onboard_client/src/utils/map/manager.map.util.dart';
+import 'package:onboard_client/src/utils/notifications/android/schedule.android.notification.dart';
 import 'package:onboard_client/src/utils/notifications/windows/schedule.windows.notifications.util.dart';
 import 'package:onboard_client/src/utils/themeprovider/themeprovider.util.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:workmanager/workmanager.dart';
 
 // Global instance for the local notifications plugin
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -61,6 +63,8 @@ void main() async {
           systemStatusBarContrastEnforced: false,
         ),
       );
+
+      Workmanager().initialize(callbackDispatcher);
     }
   }
 
@@ -116,4 +120,13 @@ class OnboardApp extends StatelessWidget {
       },
     );
   }
+}
+
+@pragma('vm:entry-point')
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) async {
+    // Your background logic, now handled in the scheduler file.
+    print("Native called background task: $task");
+    return await handleBackgroundTask(task, inputData);
+  });
 }

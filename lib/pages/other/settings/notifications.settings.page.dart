@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:onboard_client/src/utils/notifications/android/schedule.android.notification.dart';
 import 'package:onboard_client/src/utils/notifications/schedulednotification.class.util.dart';
 import 'package:onboard_client/src/utils/notifications/windows/schedule.windows.notifications.util.dart';
 import 'package:onboard_client/src/widgets/cardlist.material.component.dart';
@@ -201,6 +202,8 @@ class _NotificationsSettingsPageState extends State<NotificationsSettingsPage> {
                               if (!kIsWeb) {
                                 if (Platform.isWindows) {
                                   scheduleWindowsNotifications();
+                                } else if (Platform.isAndroid) {
+                                  scheduleAndroidNotifications();
                                 }
                               }
                               ScaffoldMessenger.of(context).showSnackBar(

@@ -46,20 +46,28 @@ class _NotificationsSettingsPageState extends State<NotificationsSettingsPage> {
     return times.map((time) => time.format(context)).join(', ');
   }
 
-  void _deleteNotification(ScheduledNotification notification) {
+  void _deleteNotification(ScheduledNotification notification) async {
     setState(() {
       _scheduledNotifications.remove(notification);
-      Hive.box<Map>('scheduled_notifications').clear();
-      Hive.box<Map>('scheduled_notifications').addAll(
-        List.generate(_scheduledNotifications.length, (i) {
-          return _scheduledNotifications[i].toMap();
-        }),
-      );
-      // Later, you would also delete this from persistent storage
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Notifica '${notification.name}' eliminata")),
-      );
     });
+    await Hive.box<Map>('scheduled_notifications').clear();
+    await Hive.box<Map>('scheduled_notifications').addAll(
+      List.generate(_scheduledNotifications.length, (i) {
+        return _scheduledNotifications[i].toMap();
+      }),
+    );
+    if (!kIsWeb) {
+      if (Platform.isWindows) {
+        scheduleWindowsNotifications();
+      } else if (Platform.isAndroid) {
+        scheduleAndroidNotifications();
+      }
+    }
+
+    // Later, you would also delete this from persistent storage
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Notifica '${notification.name}' eliminata")),
+    );
   }
 
   List<ScheduledNotification> getScheduledNotifications() {
@@ -195,7 +203,7 @@ class _NotificationsSettingsPageState extends State<NotificationsSettingsPage> {
                                 );
                               });
 
-                              Hive.box<Map>(
+                              await Hive.box<Map>(
                                 'scheduled_notifications',
                               ).add(result.toMap());
 

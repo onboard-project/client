@@ -1,3 +1,6 @@
+## 0.4.1-Beta
+- Fix: some Android notifications do not display/do not schedule
+
 ## 0.4.0-Beta
 - Feat: add Android-only scheduled notifications.
 

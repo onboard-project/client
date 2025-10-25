@@ -80,6 +80,7 @@ Future<bool> handleBackgroundTask(
     return true; // Indicate success
   } catch (e, st) {
     print('[DEBUG] ERROR in Workmanager task: $e\n\\\\STACKTRACE:\n$st');
+    displayErrorNotification('Workmanager', st.toString());
     return false; // Indicate failure
   }
 }
@@ -256,14 +257,15 @@ Future<Map<String, String>> _getStopComponentText(
     linesInfo += stop.lines
         .map((line) {
           final waitingTime = _formatWaitingTime(line.waitingTime);
-          return '<i>•${waitingTime.padLeft(10)} </i>| ${line.headcode} - ${line.terminus}';
+          return '<i>•${waitingTime.padLeft(10, ' ')} </i>| ${line.headcode} - ${line.terminus}';
         })
         .join('<br>');
     linesInfo += '<br>';
 
     return {'short': 'Fermata ${stop.id}', 'long': linesInfo};
-  } catch (e) {
+  } catch (e, st) {
     print('[DEBUG] ERROR fetching stop details for ID $id: $e');
+    displayErrorNotification('Stop', st.toString());
     return {'short': '!', "long": 'Dettagli fermata non disponibili.'};
   }
 }
@@ -278,17 +280,18 @@ Future<Map<String, String>> _getMetroStatusComponentText() async {
         .map((line) => line);
 
     final statusText = status.regular()
-        ? '<i>Regolare</i>'
+        ? '<i>Regolare</i><br>'
         : '${delayedLines.map((line) {
-            return '<i>•${line.line.name}<i/> - <b>•${line.status}</b>';
-          }).join(',<br>')}${delayedLines.length < 5 ? '<br><i>le altre linee sono regolari<i/>' : ''}<br>';
+            return '• ${line.line.name} | <i>${line.status}</i>';
+          }).join(',<br>')}${delayedLines.length < 5 ? '<br><i>le altre linee sono regolari</i>' : ''}<br>';
 
     return {
       'short': 'Stato metro',
       'long': '<b>Stato metro</b><br>$statusText',
     };
-  } catch (e) {
+  } catch (e, st) {
     print('[DEBUG] ERROR fetching metro status: $e');
+    displayErrorNotification('Metro', st.toString());
     return {'short': '!', 'long': 'Stato metro non disponibile.'};
   }
 }
@@ -302,8 +305,9 @@ Future<Map<String, String>> _getSurfaceStatusComponentText() async {
       'short': 'Stato Linee di superficie',
       'long': '<b>Stato linee di superficie</b> <br> ${status.title}<br>',
     };
-  } catch (e) {
+  } catch (e, st) {
     print('[DEBUG] ERROR fetching surface status: $e');
+    displayErrorNotification('Surface', st.toString());
     return {'short': '!', 'long': 'Stato superficie non disponibile.'};
   }
 }
@@ -328,7 +332,29 @@ String _formatWaitingTime(WaitingTime waitingTime) {
     case WaitingTimeType.noService:
     case WaitingTimeType.suspended:
       return 'N/A';
-    default:
-      return '';
   }
+}
+
+void displayErrorNotification(String operation, String stacktrace) async {
+  final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  const AndroidNotificationDetails
+  androidNotificationDetails = AndroidNotificationDetails(
+    'error_notifications_channel',
+    'Notifiche di errore',
+    channelDescription:
+        'Ricevi notifiche quando le operazioni programmate non vanno a buon fine',
+    importance: Importance.max,
+    priority: Priority.high,
+    ticker: 'ticker',
+  );
+  const NotificationDetails notificationDetails = NotificationDetails(
+    android: androidNotificationDetails,
+  );
+  await flutterLocalNotificationsPlugin.show(
+    Random().nextInt(1000),
+    '⚠️ Errore - $operation',
+    stacktrace,
+    notificationDetails,
+    payload: 'item x',
+  );
 }

@@ -4,6 +4,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:onboard_client/src/widgets/windows/windowbuttons.windows.component.dart';
 
 /// A top-level shell that wraps the entire application to provide a custom
 /// window title bar on Windows desktop platforms.
@@ -42,10 +43,10 @@ class SystemShell extends StatelessWidget {
     final theme = Theme.of(context);
     final buttonColors = WindowButtonColors(
       iconNormal: theme.colorScheme.onSurface,
-      iconMouseDown: theme.colorScheme.onError,
-      iconMouseOver: theme.colorScheme.onError,
-      mouseDown: theme.colorScheme.error,
-      mouseOver: theme.colorScheme.error,
+      iconMouseDown: theme.colorScheme.onSurface,
+      iconMouseOver: theme.colorScheme.onSurface,
+      mouseDown: theme.colorScheme.surfaceContainerHigh,
+      mouseOver: theme.colorScheme.surfaceContainerHighest,
     );
     final closeButtonColors = WindowButtonColors(
       iconNormal: theme.colorScheme.onSurface,
@@ -62,7 +63,7 @@ class SystemShell extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: 12),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox.square(
                 dimension: 24,
@@ -72,12 +73,27 @@ class SystemShell extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox.square(dimension: 12),
               Text("Onboard", style: theme.textTheme.titleSmall),
 
               Expanded(child: MoveWindow()), // Allows the window to be dragged
-              MinimizeWindowButton(colors: buttonColors),
-              MaximizeWindowButton(colors: buttonColors),
-              CloseWindowButton(colors: closeButtonColors),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  WindowsWindowButton(
+                    buttonType: WindowsButtonType.minimize,
+                    colors: buttonColors,
+                  ),
+                  WindowsWindowButton(
+                    buttonType: WindowsButtonType.maximize,
+                    colors: buttonColors,
+                  ),
+                  WindowsWindowButton(
+                    buttonType: WindowsButtonType.close,
+                    colors: closeButtonColors,
+                  ),
+                ],
+              ),
             ],
           ),
         ),

@@ -213,6 +213,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   Symbols.wand_shine_rounded,
                                   opticalSize: 24,
                                 ),
+                                trailing: Text("Coming soon"),
                               ),
                             ),
                           ],
@@ -248,6 +249,52 @@ class _SettingsPageState extends State<SettingsPage> {
                                   Symbols.info_rounded,
                                   opticalSize: 24,
                                 ),
+                                trailing: Icon(
+                                  Symbols.chevron_right_rounded,
+                                  opticalSize: 24,
+                                ),
+                                contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 6,
+                                ),
+                                onTap: () {
+                                  showAboutDialog(
+                                    context: context,
+                                    applicationLegalese:
+                                        "Questo progetto è concesso sotto licenza GNU GPL v3.0.",
+                                    applicationIcon: Image(
+                                      height: 48,
+                                      width: 48,
+                                      image: AssetImage(
+                                        'lib/assets/icons/LOGO.Onboard.rounded.png',
+                                      ),
+                                    ),
+                                    applicationName: "Onboard",
+                                    applicationVersion: '0.4.2-Beta',
+                                  );
+                                },
+                              ),
+                            ),
+                            MaterialCard(
+                              child: ListTile(
+                                title: Text("Informazioni sui tempi di attesa"),
+                                leading: Icon(
+                                  Symbols.hail_rounded,
+                                  opticalSize: 24,
+                                ),
+                                contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 6,
+                                ),
+                                onTap: () {
+                                  context.push(
+                                    '/settings/waiting-times-notice',
+                                  );
+                                },
+                                trailing: Icon(
+                                  Symbols.chevron_right_rounded,
+                                  opticalSize: 24,
+                                ),
                               ),
                             ),
                             MaterialCard(
@@ -257,13 +304,15 @@ class _SettingsPageState extends State<SettingsPage> {
                                   Symbols.balance_rounded,
                                   opticalSize: 24,
                                 ),
-                              ),
-                            ),
-                            MaterialCard(
-                              child: ListTile(
-                                title: Text("Informativa sui tempi di attesa"),
-                                leading: Icon(
-                                  Symbols.hail_rounded,
+                                contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 6,
+                                ),
+                                onTap: () {
+                                  context.push('/settings/disclaimer');
+                                },
+                                trailing: Icon(
+                                  Symbols.chevron_right_rounded,
                                   opticalSize: 24,
                                 ),
                               ),
@@ -276,6 +325,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   opticalSize: 24,
                                   fill: 1,
                                 ),
+                                trailing: Text("Coming soon"),
                               ),
                             ),
                           ],

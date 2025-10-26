@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
-class LinesInfoPage extends StatelessWidget {
-  const LinesInfoPage({super.key});
+class DisclaimerSettingsPage extends StatelessWidget {
+  const DisclaimerSettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class LinesInfoPage extends StatelessWidget {
                           contentPadding: EdgeInsets.zero,
                           title: Center(
                             child: Text(
-                              "Come leggere i tempi di attesa",
+                              "Disclaimer - Progetto educativo",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -38,8 +38,17 @@ class LinesInfoPage extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           selectable: false,
                           shrinkWrap: true,
-                          data:
-                              "Dato che i dati di localizzazione GPS dei singoli veicoli non sono pubblicamente disponibili *(sebbene ATM utilizzi queste informazioni per calcolare i tempi di attesa)*, per mostrarti la posizione in tempo reale dei veicoli sulla linea, noi otteniamo i tempi di attesa previsti per le singole fermate. \nPer aiutarti a interpretare al meglio queste informazioni, ti suggeriamo di tenere a mente quanto segue:\n1. Arrivi multipli ravvicinati: Se vedi due fermate adiacenti indicate come \"in arrivo\", è probabile che si tratti di un singolo veicolo, specialmente se le fermate sono molto vicine tra loro. Se invece le fermate coinvolte sono più di due, è più probabile che ci siano più veicoli in avvicinamento.\n2. Ricalcolo simultaneo: Se noti più fermate consecutive in fase di \"ricalcolo\", stai osservando un errore comune di ATM, visibile anche sui display fisici delle pensiline. Molto probabilmente c'è un veicolo in arrivo all'ultima di quelle fermate.\n3. Tempi di attesa decrescenti: Se vedi due fermate consecutive con un tempo di attesa progressivamente minore, significa che un veicolo è partito dalla prima fermata e impiegherà ancora qualche minuto per arrivare alla seconda.",
+                          data: """
+Questo progetto è sviluppato esclusivamente per **scopi didattici e dimostrativi**. Sebbene miri a fornire utili informazioni sul trasporto pubblico di Milano, si basa su fonti di dati che includono lo scraping di informazioni da giromilano.atm.it.
+
+**I termini di servizio di ATM (Azienda Trasporti Milanesi) relativi all'utilizzo dei dati non sono esplicitamente chiari e questo progetto potrebbe potenzialmente violarli.**
+
+Pertanto:
+- **Usa a tuo rischio e pericolo:** Non garantiamo l'accuratezza o la continua disponibilità dei dati, né ci assumiamo la responsabilità per eventuali conseguenze derivanti dal loro utilizzo.
+- **Interruzione non programmata:** Questo progetto, o parti di esso, potrebbero essere rimossi o diventare non funzionanti inaspettatamente se le politiche di ATM dovessero cambiare o se le fonti di dati diventassero inaccessibili.
+
+Si consiglia cautela e comprensione di queste limitazioni.
+""",
                         ),
                       ],
                     ),

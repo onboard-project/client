@@ -12,6 +12,7 @@ import 'package:onboard_client/pages/other/details/stop.page.dart';
 import 'package:onboard_client/pages/other/search.page.dart';
 import 'package:onboard_client/pages/other/settings/add.notifications.settings.page.dart'; // Import for AddNotificationPage
 import 'package:onboard_client/pages/other/settings/developer.settings.page.dart';
+import 'package:onboard_client/pages/other/settings/disclaimer.settings.page.dart';
 import 'package:onboard_client/pages/other/settings/favourites.settings.page.dart';
 import 'package:onboard_client/pages/other/settings/linesinfo.settings.page.dart';
 import 'package:onboard_client/pages/other/settings/notifications.settings.page.dart';
@@ -90,8 +91,12 @@ class OnboardRouter {
             },
           ),
           GoRoute(
-            path: '/settings/linesinformations',
+            path: '/settings/waiting-times-notice',
             builder: (context, state) => LinesInfoPage(),
+          ),
+          GoRoute(
+            path: '/settings/disclaimer',
+            builder: (context, state) => const DisclaimerSettingsPage(),
           ),
           GoRoute(
             path: '/settings/favourites',

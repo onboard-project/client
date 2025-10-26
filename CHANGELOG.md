@@ -1,3 +1,6 @@
+## 0.4.2-Beta
+- Feat: add disclaimer, app info and waiting times notice settings pages
+- Fix: update Windows window buttons to Win 11 icons, buttons not being stretched
 ## 0.4.1-Beta
 - Fix: some Android notifications do not display/do not schedule
 
